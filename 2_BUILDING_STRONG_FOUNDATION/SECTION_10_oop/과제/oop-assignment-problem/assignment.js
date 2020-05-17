@@ -1,50 +1,54 @@
-// 과제 1
-// class Course {
-//     constructor(title, length, price) {
-//         this.title = title;
-//         this.length = length;
-//         this.price = price;
-//     }
-// }
-
-// console.log(new Course('JavaScript', 614, 11000));
-// console.log(new Course('Node.Js', 487, 15000));
-
-// 과제2
 class Course {
+    #price;
+
+    get price() {
+        return '$' + this.price ;
+    }
+
+    set price(value) {
+        if (value <= 0) {
+            throw 'Error';
+        }
+        this.#price = value;
+    }
+
     constructor(title, length, price) {
         this.title = title;
         this.length = length;
         this.price = price;
     }
 
-    calculate() {
-        const text = this.length / this.price;
-        console.log(text);
+    calulateValue() {
+        console.log(this.length/this.#price);
     }
 
-    summary() {
-        console.log(`${this.title} is ${this.price} and ${this.length}`);
+    outputSummary() {
+        console.log(`Name: ${this.title}, Price: ${this.price}, Length: ${this.length}`);
     }
 }
 
-const course = new Course('JavaScript', 619, 11000);
-console.log(course.calculate());
-console.log(course.summary());
+console.log(new Course('JavaScript Course', 63, 11000));
+console.log(new Course('Node.js Course', 48, 12000));
 
-// 과제3
+const CSSCourse = new Course('CSS Course', 23, 11000);
+CSSCourse.calulateValue();
+CSSCourse.outputSummary();
+
 class PracticalCourse extends Course {
-    constructor(numOfExercies) {
-        super();
-        this.numOfExercies = numOfExercies;
+    constructor(title, length, price, numOfExercises) {
+        super(title, length, price);
+        this.numOfExercises = numOfExercises;
     }
 }
 
 class TheoreticalCourse extends Course {
     publish() {
-        console.log(this.title);
+        console.log('Publishing');
     }
 }
 
-const practicalCourse = new PracticalCourse();
-const TheoreticalCourse = new TheoreticalCourse();
+const reactCourse = new PracticalCourse('React Course', 40, 11000, 8);
+console.log(reactCourse);
+
+const flutterCourse = new TheoreticalCourse('Flutter Course', 30, 12000);
+flutterCourse.publish();
