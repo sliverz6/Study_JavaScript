@@ -5,9 +5,9 @@ class DOMHelper {
         return clonedElement;
     }
 
-    static moveElement(elementId, newDestintationSelector) {
+    static moveElement(elementId, newDestinationSelector) {
         const element = document.getElementById(elementId);
-        const destinationElement = document.querySelector(newDestintationSelector);
+        const destinationElement = document.querySelector(newDestinationSelector);
         destinationElement.append(element);
     }
 }
@@ -31,16 +31,16 @@ class Component {
 
     attach() {
         this.hostElement.insertAdjacentElement(
-            this.insertBefore ? 'afterbegin' : 'beforeend',
+            this.insertBefore ? 'afterbegin' : 'beforeend', 
             this.element
         );
     }
 }
 
 class ToolTip extends Component {
-    constructor(closeNotifierFunction) {
+    constructor(closeNotifierFucntion) {
         super();
-        this.closeNotifier = closeNotifierFunction;
+        this.closeNotifier = closeNotifierFucntion;
         this.create();
     }
 
@@ -116,8 +116,8 @@ class ProjectList {
         console.log(this.projects);
     }
 
-    setSwitchHandlerFucntion(swicthHandlerFucntion) {
-        this.switchHandler = swicthHandlerFucntion;
+    setSwitchHandlerFunction(switchHandlerFunction) {
+        this.switchHandler = switchHandlerFunction;
     }
 
     addProject(project) {
@@ -128,7 +128,7 @@ class ProjectList {
 
     switchProject(projectId) {
         // const projectIndex = this.projects.findIndex(p => p.id === projectId);
-        // this.projects.splice(projectIndex, 1)
+        // this.projects.splice(projectIndex, 1);
         this.switchHandler(this.projects.find(p => p.id === projectId));
         this.projects = this.projects.filter(p => p.id !== projectId);
     }
@@ -138,10 +138,10 @@ class App {
     static init() {
         const activeProjectsList = new ProjectList('active');
         const finishedProjectsList = new ProjectList('finished');
-        activeProjectsList.setSwitchHandlerFucntion(
+        activeProjectsList.setSwitchHandlerFunction(
             finishedProjectsList.addProject.bind(finishedProjectsList)
         );
-        finishedProjectsList.setSwitchHandlerFucntion(
+        finishedProjectsList.setSwitchHandlerFunction(
             activeProjectsList.addProject.bind(activeProjectsList)
         );
     }
