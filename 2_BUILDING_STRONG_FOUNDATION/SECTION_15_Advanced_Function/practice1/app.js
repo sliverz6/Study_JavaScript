@@ -1,48 +1,41 @@
 // Pure Function
 function add(num1, num2) {
-    return num1 + num2;
+    return num1, num2;
 }
 
-// function sendDataToServer() {} // Predictable Side Effect
-
-console.log(add(1, 5)); // 6
-console.log(add(12, 15)); // 27
+console.log(add(1, 2));
 
 // Impure Function
-function addRandom(num1) {
-    return num1 + Math.random();
+function addRandom(num) {
+    return num + Math.random(); // Can't Predict
 }
 
 console.log(addRandom(5));
 
-let previousResult = 0;
+// Impure Function 2 
+const previousValue = 1;
 
-// Impure Function
-function addMoreNumbers(num1, num2) {
+function addMoreNumber(num1, num2) {
     const sum = num1 + num2;
-    previousResult = sum; // Side Effect
+    previousValue = sum; // Side Effect!
     return sum;
 }
 
-console.log(addMoreNumbers(1, 5));
+// Impure Function 3 (For Reference Value)
+const hobbies = ['Sports', 'Coding'];
 
-const hobbies = ['Sports', 'Cooking'];
-
-// Impure Function // Array is Reference Value
 function printHobbies(h) {
-    h.push('NEW HOBBY');
+    h.push('NEW HOBBY'); // Array is Reference Value
     console.log(h);
 }
 
 printHobbies(hobbies);
 
-let multiplier = 1.1;
+// Factory Function
 
-// Factory Function // Clousers
-function createTaxCalculator(tax) {
+function createTaxCalculator(tax) { // Clousers
     function calculateTax(amount) {
-        console.log(multiplier);
-        return amount * tax * multiplier;
+        return amount * tax; // Clousers // Tax value is rememebered by function evironment
     }
 
     return calculateTax;
@@ -51,29 +44,13 @@ function createTaxCalculator(tax) {
 const calculateVatAmount = createTaxCalculator(0.19);
 const calculateIncomeTaxAmount = createTaxCalculator(0.25);
 
-// multiplier = 1.2;
-
 console.log(calculateVatAmount(100));
 console.log(calculateVatAmount(200));
 
-let userName = 'Max';
-
-function greetUser() {
-    // let name = 'Anna';
-    console.log('Hi ' + name);
-}
-
-let name = 'Maximilian';
-
-userName = 'Manue';
-
-greetUser();
-
-
-// Recursion (재귀)
+// Recursion
 // function powerOf(x, n) {
 //     let result = 1;
-    
+
 //     for (let i = 0; i < n; i++) {
 //         result *= x;
 //     }
@@ -81,18 +58,18 @@ greetUser();
 //     return result;
 // }
 
-// Recursion (재귀)
 function powerOf(x, n) {
 
-    // if (n === 1) {
-    //     return x;
-    // }
-    // return x * powerOf(x, n - 1);
+    if (n === 1) {
+        return x;
+    }
 
-    return n === 1 ? x : x * powerOf(x, n - 1);
+    return x * powerOf(x, n - 1);
 }
 
-console.log(powerOf(2, 3)) // 2 * 2 * 2
+console.log(powerOf(2, 3));
+
+// Recursion Example
 
 const myself = {
     name: 'Max',
@@ -101,7 +78,7 @@ const myself = {
             name: 'Manuel',
             friends: [
                 {
-                    name: 'Chirs',
+                    name: 'Chris',
                     friends: [
                         {
                             name: 'Hari'
@@ -117,7 +94,7 @@ const myself = {
             name: 'Julia'
         }
     ]
-}
+};
 
 function getFriendNames(person) {
     const collectedNames = [];
